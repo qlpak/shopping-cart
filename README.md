@@ -55,7 +55,7 @@ src/
 │               ├── ProductUtilsTest.java
 │               ├── PromotionTest.java
 |               ├── SorterTest.java
-│               ├── ShoppingCartTest.java
+│               └── ShoppingCartTest.java
 ```
 
 ---
