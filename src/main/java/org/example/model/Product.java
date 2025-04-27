@@ -24,6 +24,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return name + " - " + discountPrice + "zł";
+        return name + " - " + discountPrice + "pln";
     }
 }

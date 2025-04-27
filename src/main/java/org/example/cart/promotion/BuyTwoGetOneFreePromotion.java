@@ -14,7 +14,7 @@ public class BuyTwoGetOneFreePromotion implements Promotion {
                     .sorted(Comparator.comparingDouble(Product::getPrice))
                     .toList();
 
-            Product toMakeFree = sorted.get(2); // trzeci najtańszy
+            Product toMakeFree = sorted.get(2); // third cheapest
 
             for (Product p : products) {
                 if (p.getCode().equals(toMakeFree.getCode())
