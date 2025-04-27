@@ -101,7 +101,7 @@ mvn test
 
 ---
 
-## 🧠 Design Patterns, SOLID Principles, and Algorithmic Optimization
+## 🧠 Design Patterns, Algorithmic Optimization and SOLID Principles
 
 ### ✅ Design Patterns
 
