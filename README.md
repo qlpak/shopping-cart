@@ -53,6 +53,7 @@ src/
 │       └── java
 │           └── org.example
 │               ├── ProductUtilsTest.java
+│               ├── PerformanceTest.java
 │               ├── PromotionTest.java
 |               ├── SorterTest.java
 │               └── ShoppingCartTest.java
@@ -67,20 +68,6 @@ src/
 3. A set of **Promotions** is defined.
 4. The `PromotionOptimizer` evaluates all permutations of these promotions to find the **optimal final price**.
 5. The best combination of promotions is applied, and the final total is displayed.
-
----
-
-## ✅ Example Output
-
-```
-Najlepsza kombinacja promocji:
-Laptop - 1710.0zł
-Mouse - 50.0zł
-Keyboard - 70.0zł
-USB Hub - 0.0zł
-JavaMarkt Mug - 0.0zł
-Finalna cena: 1830.00 zł
-```
 
 ---
 
@@ -111,45 +98,55 @@ mvn test
 
 ---
 
-## 🧠 Design Patterns & SOLID Principles
+## 🧠 Design Patterns & SOLID Principles & Algorithmic Optimization
 
 ### ✅ Design Patterns
 
-- **Strategy Pattern**
-  - Used for implementing **flexible product sorting strategies**.
-  - Enables dynamic selection of sorting logic at runtime without altering the core code.
+#### Strategy Pattern
+- Used to implement **flexible product sorting strategies**.
+- Allows dynamic selection of sorting logic at runtime without altering core business logic.
 
-- **Command Pattern**
-  - Applied to **encapsulate promotions** as command objects.
-  - Decouples promotion logic from the shopping cart, making it easy to add, remove, or queue promotions.
+#### Command Pattern
+- Applied to **encapsulate promotions as command objects**.
+- Decouples promotion logic from the shopping cart, enabling dynamic queuing, applying, or removal of promotions.
+
+#### (Inspired) Event Sourcing Pattern
+- Promotions are recorded as a sequence of **command events**, allowing deferred execution and reconstruction of the cart state.
+- Although simplified, this approach decouples events from the final state computation.
+
+---
+
+### ⚡ Algorithmic Optimization
+
+#### Depth-First Search (DFS) with Branch Pruning
+- Originally, the optimizer generated all permutations of promotions, which resulted in performance issues (e.g., `OutOfMemoryError` for 100 promotions).
+- After optimization, the project uses a **Depth-First Search (DFS)** approach combined with **branch pruning** (Branch & Bound technique).
+- This drastically reduces the search space by cutting off non-promising paths early, achieving **optimal promotion application** in a **fraction of the time**.
+- Thanks to pruning, 100 promotions can now be processed efficiently without causing memory overflow or significant delays.
 
 ---
 
 ### 🧱 SOLID Principles
 
-- **Single Responsibility Principle (SRP)**
-  - Each class or component has **one specific responsibility**.
-  - Example: `ShoppingCart`, `PromotionOptimizer`, and each concrete `Promotion` class focus on distinct tasks.
+#### Single Responsibility Principle (SRP)
+- Each class has **one clear responsibility** (e.g., `ShoppingCart`, `PromotionOptimizer`, `Promotion` implementations).
 
-- **Open/Closed Principle (OCP)**
-  - The system is **open for extension but closed for modification**.
-  - Easily extendable with new promotions or sorting strategies **without changing existing code**.
+#### Open/Closed Principle (OCP)
+- The system is **open for extension** (new promotions, new sorters) **without modifying existing code**.
 
-- **Liskov Substitution Principle (LSP)**
-  - All classes implementing the `Promotion` interface can be **used interchangeably** without altering system behavior.
-  - Promotes seamless substitution of different promotion strategies.
+#### Liskov Substitution Principle (LSP)
+- All classes implementing the `Promotion` interface can be **substituted** without altering system correctness.
 
-- **Interface Segregation Principle (ISP)**
-  - Interfaces like `Promotion` and `Command` are **small and focused**, avoiding bloated interfaces.
-  - Components only depend on **what they actually use**.
+#### Interface Segregation Principle (ISP)
+- Interfaces like `Promotion` and `Command` are **small, focused, and precise**.
 
-- **Dependency Inversion Principle (DIP)**
-  - High-level modules depend on **abstractions**, not concrete implementations.
-  - Promotes **flexibility**, **testability**, and **maintainability** of the codebase.
+#### Dependency Inversion Principle (DIP)
+- High-level modules depend on **abstractions, not implementations**.
+- Promotes **clean architecture and unit testing**.
 
 ---
 
-> 💡 This architecture ensures clean, scalable, and maintainable code—fully aligned with modern software engineering practices.
+> 💡 Thanks to algorithmic improvements and a solid architecture, this project achieves **both optimal performance and clean design**, fully aligned with modern software engineering practices.
 
 ---
 
