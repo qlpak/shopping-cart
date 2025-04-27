@@ -10,7 +10,7 @@ This Java project implements a flexible and extensible **Shopping Cart System** 
   - Free product giveaways
   - Buy-2-get-1-free logic
   - Single product discount coupon
-- 🧮 **Promotion Optimizer** that evaluates all permutations of promotions to apply the best combination
+- 🧮 **Promotion Optimizer** that uses a **Depth-First Search (DFS) with branch pruning** to efficiently find the best promotion combination
 - ✅ **Test Suite** written using JUnit (AAA pattern)
 - 🔀 **Sorting Strategies**:
   - Price descending
@@ -66,7 +66,7 @@ src/
 1. **Products** are added to the `ShoppingCart`.
 2. The cart contents are **sorted** using a chosen strategy (e.g., price descending).
 3. A set of **Promotions** is defined.
-4. The `PromotionOptimizer` evaluates all permutations of these promotions to find the **optimal final price**.
+4. The `PromotionOptimizer` uses **Depth-First Search (DFS) with branch pruning** to efficiently search for the **optimal final price**, without generating all permutations.
 5. The best combination of promotions is applied, and the final total is displayed.
 
 ---
@@ -75,8 +75,11 @@ src/
 
 The project includes a full suite of **unit tests** in:
 
+- `PerformanceTest.java`
+- `ProductUtilsTest.java`
 - `PromotionTest.java`
 - `ShoppingCartTest.java`
+- `SorterTest.java`
 
 Tests follow the **AAA (Arrange–Act–Assert)** structure.
 
@@ -98,7 +101,7 @@ mvn test
 
 ---
 
-## 🧠 Design Patterns & SOLID Principles & Algorithmic Optimization
+## 🧠 Design Patterns, SOLID Principles, and Algorithmic Optimization
 
 ### ✅ Design Patterns
 
